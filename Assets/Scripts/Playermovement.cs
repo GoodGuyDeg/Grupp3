@@ -57,17 +57,19 @@ public class Playermovement : MonoBehaviour
 
         body.velocity = new Vector2(hor * movementSpeed * Time.deltaTime, body.velocity.y); //ändrar body.velocityns x värde beroende på vilken knapp man klickar på för att röra sig åt höger eller vänster (ändra inte y värdet det är body.velocity.y för att man ska kunna hoppa) - Robin
 
-        if (Input.GetKeyDown(KeyCode.A)) //när spelaren håller ned A - Robin
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) //när spelaren håller ned A eller vänster pilen- Robin
         {
             crouch.SetBool("walking", true); //sätt walking til true - Robin
             transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
         }
-        if (Input.GetKeyDown(KeyCode.D)) //när spelaren håller ned D - Robin
+        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) //när spelaren håller ned D eller höger pilen- Robin
         {
             crouch.SetBool("walking", true); //sätt walking till true - Robin
             transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
         }
-        if (Input.GetKeyUp(KeyCode.A) ||(Input.GetKeyUp(KeyCode.D))) //när spelaren håller ned A eller D - Robin
+        //när spelaren håller ned A eller D - Robin
+        //eller pilarna - EN
+        if (Input.GetKeyUp(KeyCode.A) ||(Input.GetKeyUp(KeyCode.D)) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) 
         {
             crouch.SetBool("walking", false); //sätt walking till false - Robin
         }
