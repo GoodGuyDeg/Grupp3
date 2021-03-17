@@ -52,6 +52,10 @@ public class Playermovement : MonoBehaviour
 
         currentFuel -= loseFuel * Time.deltaTime; //tar bort fuel varje sekund - Robin
         fuelBar.SetHealth(currentFuel); //Uppdaterar så att man kan se den nuvarande fuelen - Robin
+        if (currentFuel <= 0)
+        {
+            Die();
+        }
 
         float hor = Input.GetAxis("Horizontal"); //hämtar inputen "horizontal" och bevarar den i floaten hor (horizontal) - Robin
 
@@ -171,6 +175,15 @@ public class Playermovement : MonoBehaviour
         {
             currentFuel -= loseFuel * Time.deltaTime * loseFuelInWater;
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("You died");
+
+        /*anim.SetBool("IsDead", true); // sätt en animation här sen - EN*/
+        this.enabled = false;
+
     }
 }
 
