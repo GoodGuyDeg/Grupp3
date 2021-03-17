@@ -52,7 +52,7 @@ public class Playermovement : MonoBehaviour
 
         currentFuel -= loseFuel * Time.deltaTime; //tar bort fuel varje sekund - Robin
         fuelBar.SetHealth(currentFuel); //Uppdaterar så att man kan se den nuvarande fuelen - Robin
-        if (currentFuel <= 0)
+        if (currentFuel <= 0) //Om currentFuel är lika med eller mindre än 0 startar funktionen Die() - EN
         {
             Die();
         }
