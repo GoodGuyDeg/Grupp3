@@ -40,7 +40,14 @@ public class Playermovement : MonoBehaviour
     }
     void Update()
     {
-
+        if (sliding) //om du sneakar - Robin
+        {
+            movementSpeed = 500; //sätt movement speed till - Robin
+        }
+        if (!sliding) //om du inte sneakar - Robin
+        {
+            movementSpeed = 1000; //sätt movement speed till - Robin
+        }
         if (cuttherope == true) //om repet är skuret - Robin
         {
             dialogtext.text = "I cant walk that far. Il just stand here and\n wait for the rain..."; //sätt texten till det här - Robin
