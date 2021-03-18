@@ -13,6 +13,7 @@ TagManager:
   - Water
   - MushroomHead
   - OldManNPC
+  - NextLevel
   layers:
   - Default
   - TransparentFX

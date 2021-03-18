@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Playermovement : MonoBehaviour
 {
     Rigidbody2D body; //referens till spelarens rigidbody - Robin
@@ -150,6 +150,10 @@ public class Playermovement : MonoBehaviour
         {
             TakeHealing(50);
             Destroy(collision.transform.gameObject);
+        }
+        if(collision.transform.tag == "NextLevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //byter till nästa scen - Robin
         }
 
     }
