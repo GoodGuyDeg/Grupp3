@@ -26,6 +26,7 @@ public class Playermovement : MonoBehaviour
 
     public GameObject dialog; //referens till dialog texten - Robin
     public GameObject textruta; //referens till textrutan för dialogen - Robin
+    public GameObject restartbutton; //referens till restartknappen - Robin
 
     public Text dialogtext; //referens till dialog texten - Robin
 
@@ -39,6 +40,7 @@ public class Playermovement : MonoBehaviour
     }
     void Update()
     {
+
         if (cuttherope == true) //om repet är skuret - Robin
         {
             dialogtext.text = "I cant walk that far. Il just stand here and\n wait for the rain..."; //sätt texten till det här - Robin
@@ -52,6 +54,7 @@ public class Playermovement : MonoBehaviour
 
         currentFuel -= loseFuel * Time.deltaTime; //tar bort fuel varje sekund - Robin
         fuelBar.SetHealth(currentFuel); //Uppdaterar så att man kan se den nuvarande fuelen - Robin
+
         if (currentFuel <= 0) //Om currentFuel är lika med eller mindre än 0 startar funktionen Die() - EN
         {
             Die();
@@ -151,7 +154,7 @@ public class Playermovement : MonoBehaviour
             TakeHealing(50);
             Destroy(collision.transform.gameObject);
         }
-        if(collision.transform.tag == "NextLevel")
+        if(collision.transform.tag == "NextLevel") //När man går in i triggern som har tagen "NextLevel" - Robin
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //byter till nästa scen - Robin
         }
@@ -193,11 +196,11 @@ public class Playermovement : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("You died");
+        body.velocity = new Vector2(0, 0); //så att gubben stannar när man dör - Robin
+        restartbutton.SetActive(true); //sätter på restartknappen - Robin
 
         /*anim.SetBool("IsDead", true); // sätt en animation här sen - EN*/
         this.enabled = false;
-
     }
 }
 
