@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Playermovement : MonoBehaviour
 {
     Rigidbody2D body; //referens till spelarens rigidbody - Robin
@@ -26,6 +26,7 @@ public class Playermovement : MonoBehaviour
 
     public GameObject dialog; //referens till dialog texten - Robin
     public GameObject textruta; //referens till textrutan för dialogen - Robin
+    public GameObject restartbutton; //referens till restartknappen - Robin
 
     public Text dialogtext; //referens till dialog texten - Robin
 
@@ -39,6 +40,14 @@ public class Playermovement : MonoBehaviour
     }
     void Update()
     {
+        if (sliding) //om du sneakar - Robin
+        {
+            movementSpeed = 500; //sätt movement speed till - Robin
+        }
+        if (!sliding) //om du inte sneakar - Robin
+        {
+            movementSpeed = 1000; //sätt movement speed till - Robin
+        }
         if (cuttherope == true) //om repet är skuret - Robin
         {
             dialogtext.text = "I cant walk that far. Il just stand here and\n wait for the rain..."; //sätt texten till det här - Robin
@@ -52,7 +61,8 @@ public class Playermovement : MonoBehaviour
 
         currentFuel -= loseFuel * Time.deltaTime; //tar bort fuel varje sekund - Robin
         fuelBar.SetHealth(currentFuel); //Uppdaterar så att man kan se den nuvarande fuelen - Robin
-        if (currentFuel <= 0)
+
+        if (currentFuel <= 0) //Om currentFuel är lika med eller mindre än 0 startar funktionen Die() - EN
         {
             Die();
         }
@@ -61,16 +71,26 @@ public class Playermovement : MonoBehaviour
 
         body.velocity = new Vector2(hor * movementSpeed * Time.deltaTime, body.velocity.y); //ändrar body.velocityns x värde beroende på vilken knapp man klickar på för att röra sig åt höger eller vänster (ändra inte y värdet det är body.velocity.y för att man ska kunna hoppa) - Robin
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) //när spelaren håller ned A eller vänster pilen- Robin
+        /*Första if satsen på de två if satserna nedan förhindrar en bugg då man näst intill moonwalkar
+         * och avslutar gå animationen tills man släpper knappen. - EN
+         */
+        if (Input.GetKeyDown(KeyCode.RightArrow) == false && Input.GetKeyDown(KeyCode.D) == false)
         {
-            crouch.SetBool("walking", true); //sätt walking til true - Robin
-            transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) //när spelaren håller ned A eller vänster pilen- Robin
+            {
+                crouch.SetBool("walking", true); //sätt walking til true - Robin
+                transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
+            }
         }
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) //när spelaren håller ned D eller höger pilen- Robin
+        if (Input.GetKeyDown(KeyCode.LeftArrow) == false && Input.GetKeyDown(KeyCode.A) == false)
         {
-            crouch.SetBool("walking", true); //sätt walking till true - Robin
-            transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) //när spelaren håller ned D eller höger pilen- Robin
+            {
+                crouch.SetBool("walking", true); //sätt walking till true - Robin
+                transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
+            }
         }
+
         //när spelaren håller ned A eller D - Robin
         //eller pilarna - EN
         if (Input.GetKeyUp(KeyCode.A) ||(Input.GetKeyUp(KeyCode.D)) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) 
@@ -141,6 +161,10 @@ public class Playermovement : MonoBehaviour
             TakeHealing(50);
             Destroy(collision.transform.gameObject);
         }
+        if(collision.transform.tag == "NextLevel") //När man går in i triggern som har tagen "NextLevel" - Robin
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //byter till nästa scen - Robin
+        }
 
     }
     private void OnTriggerExit2D(Collider2D collision) //om spelaren exitar triggern - Robin
@@ -179,11 +203,11 @@ public class Playermovement : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("You died");
+        body.velocity = new Vector2(0, 0); //så att gubben stannar när man dör - Robin
+        restartbutton.SetActive(true); //sätter på restartknappen - Robin
 
         /*anim.SetBool("IsDead", true); // sätt en animation här sen - EN*/
         this.enabled = false;
-
     }
 }
 
