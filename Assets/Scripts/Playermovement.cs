@@ -16,6 +16,7 @@ public class Playermovement : MonoBehaviour
     public static bool cuttherope = false; //har spelaren skurit repet? - Robin
 
     public Animator crouch; //referens till animatorn där crouch finns. - Robin
+    public Animator mushroom; //referens till animatorn där mushroom finns - Robin
 
     public float maxFuel = 100; //variabel till maxFuel - Robin
     public float currentFuel; //sätter nuvarande fuel - Robin
@@ -125,7 +126,7 @@ public class Playermovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision) //om spelaren entrar triggern - Robin
     {
-        if (collision.transform.tag == "MushroomHead")
+        if (collision.transform.tag == "MushroomHead") //när spelaren går in i triggern med tagen MushroomHead - Robin
         {
             body.velocity += new Vector2(0, 10); //går du på svampen studsar du uppåt - Robin
         }
