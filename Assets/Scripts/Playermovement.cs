@@ -155,8 +155,8 @@ public class Playermovement : MonoBehaviour
         //vid contakt med en liten olja/hjärta så fylls slidern på med 10 och objektet försvinner - EN
         if (collision.tag == "heal")
         {
-            TakeHealing(10);
-            Destroy(collision.transform.gameObject);
+            TakeHealing(10); //Lägg till hur mycket den ska heala - EN
+            Destroy(collision.transform.gameObject); //förstör objektet som healingen kom från - EN
         }
         //Plus 30 HP - EN
         if (collision.tag == "Heal")
@@ -194,20 +194,20 @@ public class Playermovement : MonoBehaviour
             dialog.SetActive(false); //stängs texten av - Robin
         }
     }
-
-    //Kod för att ta up fuel av något - EN
-    public void TakeHealing(int heal)
+    private void OnTriggerStay2D(Collider2D collision) //om spelaren stannar i triggern - EN
     {
-        currentFuel += heal;
-        currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
+        //förlorar mer fuel i vatten - EN
         if (collision.tag == "Water")
         {
             currentFuel -= loseFuel * Time.deltaTime * loseFuelInWater;
         }
+    }
+
+    //Kod för att ta up fuel av något - EN
+    public void TakeHealing(int heal)
+    {
+        currentFuel += heal; //refererar till int i TakeHealing och säger vad den ska göra med den - EN
+        currentFuel = Mathf.Clamp(currentFuel, 0, maxFuel);//säger vad den ska höja och vad som är max/min värdet - EN
     }
 
     public void Die()
