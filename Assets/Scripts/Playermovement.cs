@@ -58,8 +58,8 @@ public class Playermovement : MonoBehaviour
         {
             dialogtext.text = "                     Use your flame to cut the rope.\n I would try myself but my flame has been gone for to long."; //sätt texten till det här - Robin
         }
+        
 
-        body.gravityScale = 1; //Gravity är på hela tiden
         currentFuel -= loseFuel * Time.deltaTime; //tar bort fuel varje sekund - Robin
         fuelBar.SetHealth(currentFuel); //Uppdaterar så att man kan se den nuvarande fuelen - Robin
 
@@ -75,27 +75,22 @@ public class Playermovement : MonoBehaviour
         /*Första if satsen på de två if satserna nedan förhindrar en bugg då man näst intill moonwalkar
          * och avslutar gå animationen tills man släpper knappen. - EN
          */
-        
-        
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) //när spelaren håller ned A eller vänster pilen- Robin
+        if (Input.GetKeyDown(KeyCode.RightArrow) == false && Input.GetKeyDown(KeyCode.D) == false)
         {
-            crouch.SetBool("walking", true); //sätt walking til true - Robin
-            transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
+            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) //när spelaren håller ned A eller vänster pilen- Robin
+            {
+                crouch.SetBool("walking", true); //sätt walking til true - Robin
+                transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
+            }
         }
-        
-        if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) //när spelaren håller ned D eller höger pilen- Robin
+        if (Input.GetKeyDown(KeyCode.LeftArrow) == false && Input.GetKeyDown(KeyCode.A) == false)
         {
-           crouch.SetBool("walking", true); //sätt walking till true - Robin
-           transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
+            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) //när spelaren håller ned D eller höger pilen- Robin
+            {
+                crouch.SetBool("walking", true); //sätt walking till true - Robin
+                transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
+            }
         }
-
-        else if (Input.GetKeyDown(KeyCode.D) && Input.GetKeyDown(KeyCode.A) || (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.RightArrow))) //när spelaren håller ned D eller höger pilen- Robin
-        {
-            crouch.SetBool("walking", false); //Idle animation
-            transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
-            body.velocity = new Vector2(0, 0);
-        }
-        
 
         //när spelaren håller ned A eller D - Robin
         //eller pilarna - EN
@@ -147,11 +142,6 @@ public class Playermovement : MonoBehaviour
         {
             textruta.SetActive(true); //sätts textrutan på - Robin
             dialog.SetActive(true); //sätts texten på- Robin
-        }
-
-        if (collision.tag == "WATER") //Gjorde en tag för vatten som inte är droppar då man dör direkt - EN
-        {
-            Die();
         }
 
         //vid contakt med en liten olja/hjärta så fylls slidern på med 10 och objektet försvinner - EN
