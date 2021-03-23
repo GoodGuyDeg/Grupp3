@@ -144,6 +144,11 @@ public class Playermovement : MonoBehaviour
             dialog.SetActive(true); //sätts texten på- Robin
         }
 
+        if (collision.tag == "WATER") //dör vid kontakt med vattenblock - EN
+        {
+            Die();
+        }
+
         //vid contakt med en liten olja/hjärta så fylls slidern på med 10 och objektet försvinner - EN
         if (collision.tag == "heal")
         {

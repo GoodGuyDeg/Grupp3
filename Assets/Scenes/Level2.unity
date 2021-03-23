@@ -4106,8 +4106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6519c94f743ceb499bf0456c5e8fc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1416
+  movementSpeed: 1530
   crouch: {fileID: 1858551002}
+  mushroom: {fileID: 0}
   maxFuel: 100
   currentFuel: 0
   loseFuel: 1
