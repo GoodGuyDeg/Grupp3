@@ -7,8 +7,11 @@ public class Playermovement : MonoBehaviour
 {
     Rigidbody2D body; //referens till spelarens rigidbody - Robin
 
-    [SerializeField, Range(150, 2000)] //gör en slider som man kan ändra i konsolen till spelaren speed - Robin
     float movementSpeed; //float till spelarens speed - Robin
+    [SerializeField, Range(150, 1000)]
+    float crouchspeed = 500;
+    [SerializeField, Range(150, 2000)] //gör en slider som man kan ändra i konsolen till spelaren speed - Robin
+    float walkspeed = 1600; 
 
     bool hasJumped = true; //en bool som frågar om spelaren har hoppat - Robin
     bool sliding; //om spelaren slidar eller inte - Robin
@@ -43,11 +46,11 @@ public class Playermovement : MonoBehaviour
     {
         if (sliding) //om du sneakar - Robin
         {
-            movementSpeed = 500; //sätt movement speed till - Robin
+            movementSpeed = crouchspeed; //sätt movement speed till - Robin
         }
         if (!sliding) //om du inte sneakar - Robin
         {
-            movementSpeed = 1000; //sätt movement speed till - Robin
+            movementSpeed = walkspeed; //sätt movement speed till - Robin
         }
         if (cuttherope == true) //om repet är skuret - Robin
         {
