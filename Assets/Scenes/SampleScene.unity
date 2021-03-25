@@ -17033,7 +17033,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 636025287}
   m_LocalRotation: {x: -0, y: -0, z: 0.5593562, w: 0.8289274}
-  m_LocalPosition: {x: -3.36, y: 2.37, z: 442.3904}
+  m_LocalPosition: {x: -3.57, y: 2.37, z: 442.3904}
   m_LocalScale: {x: 8, y: 5, z: 0.61764}
   m_Children: []
   m_Father: {fileID: 432717214}
@@ -43058,7 +43058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crouchspeed: 500
-  walkspeed: 1600
+  walkspeed: 1000
   crouch: {fileID: 1644742544}
   mushroom: {fileID: 1077034802}
   maxFuel: 100
