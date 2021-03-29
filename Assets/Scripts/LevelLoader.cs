@@ -19,7 +19,7 @@ public class LevelLoader : MonoBehaviour
     }
     public void LoadStart()
     {
-        SceneManager.LoadScene("StartScreene"); //Ändrar Sceen till Startscreen/
+        SceneManager.LoadScene("StartScreene"); //Ändrar Sceen till Startscreen/Timothy
     }
     public void QuitGame()
     {

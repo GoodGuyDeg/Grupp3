@@ -11,7 +11,8 @@ public class Playermovement : MonoBehaviour
     [SerializeField, Range(150, 1000)]
     float crouchspeed = 500;
     [SerializeField, Range(150, 2000)] //gör en slider som man kan ändra i konsolen till spelaren speed - Robin
-    float walkspeed = 1600; 
+    float walkspeed = 1600;
+    public float jumpheight = 7;
 
     bool hasJumped = true; //en bool som frågar om spelaren har hoppat - Robin
     bool sliding; //om spelaren slidar eller inte - Robin
@@ -41,6 +42,7 @@ public class Playermovement : MonoBehaviour
         canstand = true; //spelaren kan stå blir true - Robin
         currentFuel = maxFuel; //sätter nuvarande fuel till maxfuel i början.
         fuelBar.SetMaxFuel(maxFuel); //sätter värdet på fuelbaren
+        Cursor.lockState = CursorLockMode.Locked; //gör så att man inte kan se musen - EN
     }
     void Update()
     {
@@ -105,7 +107,7 @@ public class Playermovement : MonoBehaviour
         {
             if (Input.GetButtonDown("Jump") && !hasJumped) //Om spelaren klickar på jump och spelaren inte har hoppat så hoppar den - Robin
             {
-                body.velocity = new Vector2(body.velocity.x, 7);
+                body.velocity = new Vector2(body.velocity.x, jumpheight);
                 hasJumped = true;
             }
         }
@@ -214,6 +216,7 @@ public class Playermovement : MonoBehaviour
     {
         body.velocity = new Vector2(0, 0); //så att gubben stannar när man dör - Robin
         restartbutton.SetActive(true); //sätter på restartknappen - Robin
+        Cursor.lockState = CursorLockMode.Confined; //Sätter på musen igen - EN
 
         /*anim.SetBool("IsDead", true); // sätt en animation här sen - EN*/
         this.enabled = false;
