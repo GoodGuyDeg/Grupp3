@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.AssetImporters;
+
 public class Playermovement : MonoBehaviour
 {
     Rigidbody2D body; //referens till spelarens rigidbody - Robin
@@ -139,7 +141,7 @@ public class Playermovement : MonoBehaviour
         {
             canstand = false; //blir canstand false - Robin
         }
-        if (collision.transform.tag == "Startingjump") //om spelaren triggar tag startingjump - Robin
+        if (collision.transform.tag == "StartingJump") //om spelaren triggar tag startingjump - Robin
         {
             Time.timeScale = 0.6f; //tiden slowar ned - Robin
         }
@@ -175,6 +177,10 @@ public class Playermovement : MonoBehaviour
         if(collision.transform.tag == "NextLevel") //När man går in i triggern som har tagen "NextLevel" - Robin
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //byter till nästa scen - Robin
+        }
+        if(collision.transform.tag == "TheEnd") //om du triggar triggern som heter TheEnd - Robin
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -3); //byter till första scenen - Robin
         }
 
     }
