@@ -247,6 +247,7 @@ public class Playermovement : MonoBehaviour
         body.velocity = new Vector2(0, 0); //så att gubben stannar när man dör - Robin
         restartbutton.SetActive(true); //sätter på restartknappen - Robin
         Cursor.lockState = CursorLockMode.Confined; //Sätter på musen igen - EN
+        crouch.SetBool("walking", false); //Stänger av walking animatinon när man dör - EN
 
         /*anim.SetBool("IsDead", true); // sätt en animation här sen - EN*/
         this.enabled = false; //stänger av coden - EN
