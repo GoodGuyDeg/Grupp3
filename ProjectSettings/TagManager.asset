@@ -15,6 +15,9 @@ TagManager:
   - OldManNPC
   - NextLevel
   - WATER
+  - TheEnd
+  - StartingJump
+  - Endingjump
   layers:
   - Default
   - TransparentFX

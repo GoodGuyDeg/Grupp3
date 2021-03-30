@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor.Experimental.AssetImporters;
+
 public class Playermovement : MonoBehaviour
 {
     Rigidbody2D body; //referens till spelarens rigidbody - Robin
 
     float movementSpeed; //float till spelarens speed - Robin
     [SerializeField, Range(150, 1000)]
-    float crouchspeed = 500;
+    float crouchspeed = 500; //variabel för crouchspeed i inspektorn - EN
     [SerializeField, Range(150, 2000)] //gör en slider som man kan ändra i konsolen till spelaren speed - Robin
-    float walkspeed = 1600;
-    public float jumpheight = 7;
+    float walkspeed = 1600; //variabel för walkspeed i inspektorn - EN
+    float privatewalkspeed; //variabel för walkspeed i koden - EN
+    float privatecrouchspeed; //variabel för crouchspeed i koden - EN
+    public float jumpheight = 7;// hur högt man kan hoppa variabel - EN
 
     bool hasJumped = true; //en bool som frågar om spelaren har hoppat - Robin
     bool sliding; //om spelaren slidar eller inte - Robin
@@ -43,16 +47,19 @@ public class Playermovement : MonoBehaviour
         currentFuel = maxFuel; //sätter nuvarande fuel till maxfuel i början.
         fuelBar.SetMaxFuel(maxFuel); //sätter värdet på fuelbaren
         Cursor.lockState = CursorLockMode.Locked; //gör så att man inte kan se musen - EN
+        movementSpeed = walkspeed; //sätt movement speed till walkspeed - EN
+        privatewalkspeed = walkspeed; //sätt privatewalkspeed speed till walkspeed - EN
+        privatecrouchspeed = crouchspeed; //sätt privatecrouchspeed speed till crouchspeed - EN
     }
     void Update()
     {
         if (sliding) //om du sneakar - Robin
         {
-            movementSpeed = crouchspeed; //sätt movement speed till - Robin
+            movementSpeed = privatecrouchspeed; //sätt movement speed till crouchspeed - Robin
         }
         if (!sliding) //om du inte sneakar - Robin
         {
-            movementSpeed = walkspeed; //sätt movement speed till - Robin
+            movementSpeed = privatewalkspeed; //sätt movement speed till walkspeed - Robin
         }
         if (cuttherope == true) //om repet är skuret - Robin
         {
@@ -76,26 +83,45 @@ public class Playermovement : MonoBehaviour
         float hor = Input.GetAxis("Horizontal"); //hämtar inputen "horizontal" och bevarar den i floaten hor (horizontal) - Robin
 
         body.velocity = new Vector2(hor * movementSpeed * Time.deltaTime, body.velocity.y); //ändrar body.velocityns x värde beroende på vilken knapp man klickar på för att röra sig åt höger eller vänster (ändra inte y värdet det är body.velocity.y för att man ska kunna hoppa) - Robin
-
-        /*Första if satsen på de två if satserna nedan förhindrar en bugg då man näst intill moonwalkar
-         * och avslutar gå animationen tills man släpper knappen. - EN
+       
+        /* Första if satsen gör så att man inte kan gå någonstans om man försöker gå både höger och vänster samtidigt.
+         * Andra if satsen eller else if satsen sätter tillbaka speed variablarna så att man kan röra sig igen och använder sig av
+         * Robbins kod för att gå. 
+         * Den fixar också så att animationen börjar igen.
+         * - EN 
          */
-        if (Input.GetKeyDown(KeyCode.RightArrow) == false && Input.GetKeyDown(KeyCode.D) == false)
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow) 
+            || Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D) 
+            || Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.D) 
+            || Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.RightArrow))
         {
-            if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) //när spelaren håller ned A eller vänster pilen- Robin
-            {
-                crouch.SetBool("walking", true); //sätt walking til true - Robin
-                transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
-            }
+            privatecrouchspeed = 0;
+            privatewalkspeed = 0;
+
+            crouch.SetBool("walking", false);
         }
-        if (Input.GetKeyDown(KeyCode.LeftArrow) == false && Input.GetKeyDown(KeyCode.A) == false)
-        {
-            if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) //när spelaren håller ned D eller höger pilen- Robin
-            {
-                crouch.SetBool("walking", true); //sätt walking till true - Robin
-                transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
-            }
-        }
+        else if (!Input.GetKey(KeyCode.LeftArrow) || !Input.GetKey(KeyCode.A)
+              || !Input.GetKey(KeyCode.D) || !Input.GetKey(KeyCode.RightArrow))
+             {
+                privatecrouchspeed = crouchspeed;
+                privatewalkspeed = walkspeed;
+            
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) //när spelaren håller ned D eller höger pilen- Robin
+                   || Input.GetKey(KeyCode.D) && Input.GetKeyUp(KeyCode.A)
+                   || Input.GetKey(KeyCode.RightArrow) && Input.GetKeyUp(KeyCode.LeftArrow)) 
+                {
+                    crouch.SetBool("walking", true); //sätt walking till true - Robin
+                    transform.eulerAngles = new Vector2(0, 0); //vänder på spelaren - Robin
+                }
+            
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow) //när spelaren håller ned D eller höger pilen- Robin
+                   || Input.GetKey(KeyCode.A) && Input.GetKeyUp(KeyCode.D)
+                   || Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyUp(KeyCode.RightArrow)) 
+                {
+                    crouch.SetBool("walking", true); //sätt walking till true - Robin
+                    transform.eulerAngles = new Vector2(0, 180); //vänder på spelaren - Robin
+                }
+             }
 
         //när spelaren håller ned A eller D - Robin
         //eller pilarna - EN
@@ -139,7 +165,7 @@ public class Playermovement : MonoBehaviour
         {
             canstand = false; //blir canstand false - Robin
         }
-        if (collision.transform.tag == "Startingjump") //om spelaren triggar tag startingjump - Robin
+        if (collision.transform.tag == "StartingJump") //om spelaren triggar tag startingjump - Robin
         {
             Time.timeScale = 0.6f; //tiden slowar ned - Robin
         }
@@ -175,6 +201,10 @@ public class Playermovement : MonoBehaviour
         if(collision.transform.tag == "NextLevel") //När man går in i triggern som har tagen "NextLevel" - Robin
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //byter till nästa scen - Robin
+        }
+        if(collision.transform.tag == "TheEnd") //om du triggar triggern som heter TheEnd - Robin
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -3); //byter till första scenen - Robin
         }
 
     }
@@ -219,7 +249,7 @@ public class Playermovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined; //Sätter på musen igen - EN
 
         /*anim.SetBool("IsDead", true); // sätt en animation här sen - EN*/
-        this.enabled = false;
+        this.enabled = false; //stänger av coden - EN
     }
 }
 
