@@ -203,7 +203,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: a4276643939ae494c98477cbd845157b, type: 3}
   m_Color: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   m_FlipX: 0
@@ -5953,8 +5953,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249414071}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 70.53, y: 0.762, z: 26.31294}
-  m_LocalScale: {x: 3.7714458, y: 0.09574776, z: 1}
+  m_LocalPosition: {x: 70.53, y: 0.738, z: 26.31294}
+  m_LocalScale: {x: 3.7714458, y: 0.083309546, z: 1}
   m_Children: []
   m_Father: {fileID: 1853804707}
   m_RootOrder: 2
@@ -6061,8 +6061,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267008116}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 81.26, y: -1.9377123, z: 26.31294}
-  m_LocalScale: {x: 0.1289087, y: 0.1287439, z: 1}
+  m_LocalPosition: {x: 81.301, y: -1.9377123, z: 26.31294}
+  m_LocalScale: {x: 0.114381775, y: 0.1287439, z: 1}
   m_Children: []
   m_Father: {fileID: 1853804707}
   m_RootOrder: 1
@@ -6614,8 +6614,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369611828}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 70.50584, y: -0.45871222, z: 26.31294}
-  m_LocalScale: {x: 3.7714458, y: 0.6720896, z: 1}
+  m_LocalPosition: {x: 77.33, y: -0.71, z: 26.31294}
+  m_LocalScale: {x: 6, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 1853804707}
   m_RootOrder: 3
@@ -6658,10 +6658,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b24b7f5556f129d4896c85766212bf29, type: 3}
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 21300000, guid: 9ddf494ce8623324aa1744362c1ee273, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.71, y: 3.92}
@@ -9372,7 +9372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crouchspeed: 500
-  walkspeed: 1600
+  walkspeed: 1000
   jumpheight: 7
   crouch: {fileID: 842987583}
   mushroom: {fileID: 0}
@@ -9443,7 +9443,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 842987580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 98.1, y: -3.8, z: 0}
+  m_LocalPosition: {x: 7.4, y: -4.42, z: 0}
   m_LocalScale: {x: 3.987762, y: 3.987762, z: 3.987762}
   m_Children:
   - {fileID: 1569175013}
@@ -12042,8 +12042,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492491392}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 81.26, y: 1.0332878, z: 26.31294}
-  m_LocalScale: {x: 0.1289087, y: 0.11099723, z: 1}
+  m_LocalPosition: {x: 81.313, y: 1.0332878, z: 26.31294}
+  m_LocalScale: {x: 0.11035731, y: 0.11099723, z: 1}
   m_Children: []
   m_Father: {fileID: 1853804707}
   m_RootOrder: 4
