@@ -26403,7 +26403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crouchspeed: 500
-  walkspeed: 1600
+  walkspeed: 1000
   jumpheight: 7
   crouch: {fileID: 1858551002}
   mushroom: {fileID: 0}

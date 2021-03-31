@@ -46,7 +46,6 @@ public class Playermovement : MonoBehaviour
         canstand = true; //spelaren kan stå blir true - Robin
         currentFuel = maxFuel; //sätter nuvarande fuel till maxfuel i början.
         fuelBar.SetMaxFuel(maxFuel); //sätter värdet på fuelbaren
-        Cursor.lockState = CursorLockMode.Locked; //gör så att man inte kan se musen - EN
         movementSpeed = walkspeed; //sätt movement speed till walkspeed - EN
         privatewalkspeed = walkspeed; //sätt privatewalkspeed speed till walkspeed - EN
         privatecrouchspeed = crouchspeed; //sätt privatecrouchspeed speed till crouchspeed - EN
