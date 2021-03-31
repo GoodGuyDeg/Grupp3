@@ -14,5 +14,6 @@ public class RestartButton : MonoBehaviour
     public void restartscene() //restartscene funktion - Robin
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); //reloadar scenen om man klickar på UI - Robin
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

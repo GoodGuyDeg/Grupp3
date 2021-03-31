@@ -4,7 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
-  public void LoadLVL1()
+    public void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void LoadLVL1()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //Ändrar Sceen till Level 1/Timothy
         Cursor.lockState = CursorLockMode.Locked;
